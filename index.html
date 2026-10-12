@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WLOG Collective</title>
+<meta name="description" content="WLOG Collective is a group of mathematicians of all levels striving for a research environment that is human-motivated, egalitarian, and connects the days of the chalkboard to the 21st century.">
+<meta name="theme-color" content="#D9CEBC">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23D9CEBC'/%3E%3Ctext x='16' y='24' font-size='24' text-anchor='middle' font-family='Georgia,serif' font-weight='bold' fill='%230D0E4A'%3Ew%3C/text%3E%3C/svg%3E">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<!-- more textbook themed than like windows 95 themed, we're mathematicians not compooper scientists.
+<style>
+  :root {
+    /* Palette: the approved list in Aesthetic_Brand_Notes, plus burnt yellow and moss green.
+       paper + parchment: the page and the printed plates.  ink + navy: text, rules, graph paper.
+       blue + pale: washes and hover.  gold, moss, rose, red: the colors that pop, spread across sections and plates. */
+    --paper: #D9CEBC;
+    --cream: #F3E8D4;
+    --ink: #0D0E4A;
+    --navy: #20486B;
+    --blue: #6699CC;
+    --pale: #ACD7E7;
+    --red: #AF3F3B;
+    --gold: #DFCA74;
+    --moss: #837825;
+    --rose: #C2938D;
+    --parch: #F0E3C5;
+
+    --serif: "EB Garamond", Garamond, "Hoefler Text", "Palatino Linotype", Georgia, serif;
+
+    --cols: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1fr);
+    --gap: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    line-height: 1.5;
+    background-color: var(--paper);
+    /* Faint graph paper. Delete these two lines to remove it. */
+    background-image:
+      linear-gradient(rgba(32, 72, 107, 0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(32, 72, 107, 0.09) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .wrap {
+    max-width: 76rem;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+  }
+
+  ::selection { background: var(--pale); }
+
+  a {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+    text-decoration-color: var(--red);
+  }
+  a:hover { background: var(--pale); text-decoration-color: var(--ink); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  .skip {
+    position: absolute;
+    left: -999px;
+    top: 0.5rem;
+    background: var(--cream);
+    padding: 0.4rem 0.7rem;
+  }
+  .skip:focus { left: 0.5rem; z-index: 10; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* Running head, like the top of a book page */
+  .top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.35rem 1.75rem;
+    padding: 1rem 0 0.8rem;
+    font-size: 1.15rem;
+    font-variant-caps: all-small-caps;
+    letter-spacing: 0.07em;
+  }
+  .top a {
+    margin: 0 -0.3rem;
+    padding: 0.05rem 0.3rem;
+    text-decoration: none;
+  }
+  .top .mark { font-weight: 600; }
+  .top nav { display: flex; flex-wrap: wrap; gap: 0.2rem 1.4rem; }
+
+  /* Title page */
+  .hero {
+    border-top: 3px double var(--ink);
+    padding: 3.5rem 0 4.5rem;
+  }
+  .hero h1 {
+    margin: 0;
+    font-weight: 600;
+    font-size: clamp(3.4rem, 10vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: -0.015em;
+  }
+  .tagline {
+    margin: 1.25rem 0 0;
+    max-width: 34ch;
+    text-wrap: balance;
+    font-style: italic;
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    line-height: 1.2;
+  }
+
+  /* Figures, set like printed plates */
+  .fig { margin: 0; }
+  .fig figcaption {
+    margin-top: 0.7rem;
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+  .fig figcaption b { font-weight: 600; }
+  .fig svg { display: block; width: 100%; height: auto; }
+
+  .hero .fig { margin-top: 3.5rem; }
+  .hero .fig figcaption { font-size: 1.2rem; max-width: 62ch; }
+
+  /* Figure 1: oscilloscope art on a dark screen, with one button to retune it */
+  .scope {
+    background: var(--parch);
+    border: 1px solid var(--ink);
+  }
+  .scope canvas { display: block; width: 100%; height: auto; }
+  .scope-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem 1rem;
+    padding: 0.7rem 1rem 0.8rem;
+    border-top: 1px solid var(--ink);
+    color: var(--ink);
+  }
+  .scope-tag {
+    font-size: 1.2rem;
+    font-variant-caps: all-small-caps;
+    letter-spacing: 0.09em;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.55rem 1.25rem;
+    font-family: inherit;
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    color: var(--ink);
+    background: var(--cream);
+    text-decoration: none;
+    border: 3px double var(--ink);
+    cursor: pointer;
+  }
+  .btn:hover { background: var(--pale); }
+
+  /* Plates in the margins and between sections */
+  .row .fig svg,
+  .poly-row {
+    background: var(--parch);
+    border: 1px solid var(--ink);
+  }
+  .row .fig { max-width: 16rem; }
+
+  .ln { fill: none; stroke: #0D0E4A; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .fh { fill: url(#hatch); stroke: #0D0E4A; stroke-width: 1.5; stroke-linejoin: round; }
+  .pf { fill: #F0E3C5; stroke: #0D0E4A; stroke-width: 1.7; stroke-linejoin: round; stroke-linecap: round; }
+  .lbl { font-family: var(--serif); font-style: italic; font-size: 17px; fill: #0D0E4A; }
+  .lbl.big { font-size: 36px; }
+  .lbl.sm { font-size: 15px; font-style: normal; }
+  .sup { font-size: 11px; }
+  .wg { fill: #E6D494; stroke: none; }
+  .wr { fill: #D4B3A3; stroke: none; }
+  .wb { fill: #9DB7C9; stroke: none; }
+  .wm { fill: #AFA365; stroke: none; }
+  .wp { fill: #C7DCD9; stroke: none; }
+  .wx { fill: #C98172; stroke: none; }
+
+  .wide { margin: 0 0 3.75rem; }
+  .wide .fig figcaption { font-size: 1.2rem; }
+
+  .guide-plate {
+    background: var(--parch);
+    border: 1px solid var(--ink);
+    padding: 1.4rem 1rem 1.6rem;
+  }
+  .guide-title {
+    margin: 0;
+    text-align: center;
+    font-size: 1.6rem;
+    font-variant-caps: all-small-caps;
+    letter-spacing: 0.1em;
+  }
+  .guide-sub {
+    margin: 0 0 1.4rem;
+    text-align: center;
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+  .guide-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.6rem 1rem;
+  }
+  .cell { text-align: center; }
+  .cell svg { max-width: 15rem; margin: 0 auto; }
+  .cell p { margin: 0.35rem 0 0; font-size: 1.1rem; line-height: 1.2; }
+
+  .poly-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(5.2rem, 1fr));
+    gap: 0.4rem;
+    padding: 1.1rem 0.6rem 0.8rem;
+  }
+  .pcell { text-align: center; }
+  .pcell svg { max-width: 5.6rem; margin: 0 auto; }
+  .pcell span { display: block; font-size: 0.95rem; font-variant-caps: all-small-caps; letter-spacing: 0.06em; }
+
+  /* Content rows */
+  .row {
+    display: grid;
+    grid-template-columns: var(--cols);
+    gap: 1.25rem var(--gap);
+    border-top: 1px solid var(--ink);
+    padding: 1.25rem 0 3.75rem;
+  }
+
+  .row > h2::before {
+    content: "";
+    display: block;
+    width: 3.25rem;
+    height: 0.55rem;
+    margin-bottom: 0.7rem;
+    background: var(--tab, var(--blue));
+    border: 1px solid var(--ink);
+  }
+  #mission { --tab: var(--blue); }
+  #name { --tab: var(--rose); }
+  #work { --tab: var(--gold); }
+  #mentorship { --tab: var(--moss); }
+  #get-involved { --tab: var(--pale); }
+
+  .row > h2 {
+    margin: 0;
+    font-weight: 400;
+    font-size: clamp(1.9rem, 3vw, 2.4rem);
+    line-height: 1.05;
+  }
+
+  .main p { margin: 0 0 1em; }
+  .main p:last-child { margin-bottom: 0; }
+  .main .lead { font-size: 1.6rem; line-height: 1.35; }
+
+  .aside {
+    font-size: 1.1rem;
+    line-height: 1.45;
+  }
+  .aside p { margin: 0 0 0.9em; }
+  .aside p:last-child { margin-bottom: 0; }
+  .aside b { font-weight: 600; }
+  .aside .fig { margin-top: 1.4rem; }
+  .aside > .fig:first-child { margin-top: 0; }
+
+  .plain {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .plain li { padding: 0.6rem 0; }
+  .plain li + li { border-top: 1px solid rgba(13, 14, 74, 0.3); }
+  .plain li:first-child { padding-top: 0; }
+
+  /* A glossary entry and a theorem, as in a textbook */
+  .define { margin: 0 0 1.75rem; }
+  .define b { font-weight: 600; font-size: 1.25em; }
+
+  .proof {
+    border-left: 3px solid var(--moss);
+    padding-left: 0.9rem;
+  }
+  .proof p { margin: 0 0 0.5em; }
+  .proof em { font-style: italic; }
+  .proof .qed { margin-left: 0.3em; }
+
+  .main .btn { margin-bottom: 1.1rem; }
+
+  /* Footer */
+  .foot-wrap { border-top: 3px double var(--ink); }
+  .foot {
+    padding: 1.25rem 0 2.5rem;
+    font-size: 1.1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+  }
+  .foot p { margin: 0; }
+  .foot .qed-line { font-style: italic; }
+
+  @media (max-width: 52rem) {
+    .row { grid-template-columns: minmax(0, 1fr); }
+    .hero { padding: 2.25rem 0 3rem; }
+    .hero .fig { margin-top: 2.5rem; }
+    .row { padding-bottom: 2.75rem; }
+    .guide-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .wide { margin-bottom: 2.75rem; }
+  }
+</style>
+</head>
+
+<body id="top">
+<a class="skip" href="#mission">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#0D0E4A" stroke-width="0.9"/></pattern>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L8 5L1 9" fill="none" stroke="#0D0E4A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker id="ahm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M1 1L8 5L1 9" fill="none" stroke="#837825" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="#top">WLOG Collective</a>
+    <nav aria-label="Sections">
+      <a href="#mission">Mission</a>
+      <a href="#work">What we do</a>
+      <a href="#mentorship">Mentorship</a>
+      <a href="#get-involved">Get involved</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <h1 id="title">WLOG Collective</h1>
+      <p class="tagline">Without loss of generality, without loss of anyone.</p>
+
+      <figure class="fig">
+        <div class="scope">
+          <canvas id="scope" width="1000" height="500" role="img" aria-label="Oscilloscope art printed in overlapping inks:  Lissajous curves, a Lorenz attractor, a Hénon map, and a standard map, in blue, rose, red, and moss.">
+            Oscilloscope art: a Lissajous ribbon, a Lorenz attractor, a Hénon map, and a standard map.
+          </canvas>
+          <div class="scope-bar">
+            <button type="button" class="btn" id="retune">Change it</button>
+            <span class="scope-tag">Oscilloscope art</span>
+          </div>
+        </div>
+        <p class="sr-only" id="scope-status" aria-live="polite"></p>
+        <figcaption><b>Figure 1.</b> If you don’t like something, change it. A small change to one parameter can turn order into chaos, or back again. Clicking on each figure alters the parameters, changing the regime. A Lissajous ribbon (parameters = frequencies), a Lorenz attractor (parameter = &rho;), a standard map (parameter = <i>K</i>), and, on wider screens, a H&eacute;non map (parameter = <i>b</i>). At <i>K</i> = 0.35, for example, the maps settle down to a fairly predictable state. But at <i>K</i> = 3.2, it is mostly chaos.</figcaption>
+      </figure>
+    </section>
+<!-- fck -->
+    <section class="row" id="mission" aria-labelledby="mission-h">
+      <h2 id="mission-h">Mission</h2>
+      <div class="main">
+        <p class="lead">We are a group of mathematicians of all levels working toward community and equity in our beautiful subject. We hope to participate in a research environment that is human-motivated, egalitarian, and connects the days of the chalkboard to the days of Lean 4.</p>
+        <p>Mathematics in the age of AI has outgrown much of the academia built for the 20th century. We want to close that gap by connecting mathematicians from every background, and by keeping *people* at the center of our work.</p>
+      </div>
+      <div class="aside">
+        <figure class="fig">
+          <svg viewBox="0 0 240 170" role="img" aria-label="A flat, hatched rectangle over the interval from 0 to 1: the uniform probability density."><path class="ln" d="M30 140H214M206 134L214 140L206 146"/><path class="ln" d="M30 140V22M24 31L30 22L36 31"/><rect class="wg" x="64" y="72" width="128" height="68"/><rect class="fh" x="64" y="72" width="128" height="68"/><path class="ln" d="M64 140V147M192 140V147" stroke-width="1.3"/><text class="lbl sm" x="64" y="164" text-anchor="middle">0</text><text class="lbl sm" x="192" y="164" text-anchor="middle">1</text><text class="lbl" x="128" y="62" text-anchor="middle">f(x) = 1</text></svg>
+          <figcaption><b>Figure 2.</b> Egalitarianism as a probability distribution. </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="row" id="name" aria-labelledby="name-h">
+      <h2 id="name-h">The name</h2>
+      <div class="main">
+        <p>Mathematicians use the term "without loss of generality" in a proof when they pick one case to work with and want you to know the choice doesn’t matter, because the same argument would still work for any other case.  </p>
+        <p> So, if a statement works without loss of generality, it should work for more than one "thing": more than one set, more than one variable, more than one map, or, *more than one type of person*. We want the culture of research mathematics to work the same way. </p>
+      </div>
+      <div class="aside">
+        <p class="define"><b>WLOG</b> <i>abbr.</i> without loss of generality</p>
+        <div class="proof">
+          <p><b>Theorem.</b> <em>Everyone is welcome in mathematics. </em></p>
+          <p><b>Proof.</b> Left as an exercise to the reader. <span class="qed" role="img" aria-label="end of proof">&#8718;</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="row" id="work" aria-labelledby="work-h">
+      <h2 id="work-h">What we do</h2>
+      <div class="main">
+        <ul class="plain">
+          <li>Free educational resources and support for low-income undergraduate students.</li>
+          <li>Scholarships, research opportunities, and mentorship.</li>
+          <li>Workshops, lectures, and math-a-thons. </li>
+          <li>Building a path to (affordably) publish your work. </li>
+        </ul>
+      </div>
+      <div class="aside">
+        <figure class="fig">
+          <svg viewBox="0 0 240 170" role="img" aria-label="A number line of group elements g to the minus 2, g to the minus 1, e, g, and g squared, with an arrow from each to the next labeled times g."><path class="ln" d="M8 112H232M16 106L8 112L16 118M224 106L232 112L224 118"/><path class="ln" d="M40 102Q56 68 71 102" stroke-width="1.4" marker-end="url(#ah)"/><path class="ln" d="M83 102Q98 68 114 102" stroke-width="1.4" marker-end="url(#ah)"/><path class="ln" d="M126 102Q142 68 157 102" stroke-width="1.4" marker-end="url(#ah)"/><path class="ln" d="M169 102Q184 68 200 102" stroke-width="1.4" marker-end="url(#ah)"/><circle class="wm" cx="34" cy="112" r="7"/><circle class="fh" cx="34" cy="112" r="7"/><circle class="wm" cx="77" cy="112" r="7"/><circle class="fh" cx="77" cy="112" r="7"/><circle class="wg" cx="120" cy="112" r="7"/><circle class="fh" cx="120" cy="112" r="7"/><circle class="wm" cx="163" cy="112" r="7"/><circle class="fh" cx="163" cy="112" r="7"/><circle class="wm" cx="206" cy="112" r="7"/><circle class="fh" cx="206" cy="112" r="7"/><text class="lbl" x="34" y="140" text-anchor="middle">g<tspan class="sup" dy="-7">−2</tspan></text><text class="lbl" x="77" y="140" text-anchor="middle">g<tspan class="sup" dy="-7">−1</tspan></text><text class="lbl" x="120" y="140" text-anchor="middle">e</text><text class="lbl" x="163" y="140" text-anchor="middle">g</text><text class="lbl" x="206" y="140" text-anchor="middle">g<tspan class="sup" dy="-7">2</tspan></text><text class="lbl sm" x="120" y="72" text-anchor="middle">× g</text></svg>
+          <figcaption><b>Figure 4.</b> A free group.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="row" id="mentorship" aria-labelledby="mentorship-h">
+      <h2 id="mentorship-h">Mentorship and research opportunities</h2>
+      <div class="main">
+        <p>We offer research mentorship to undergraduates, in which they can work alongside mathematicians on real research problems. AI has done away with many of the "get your foot in the door" tasks for undergraduate researchers, and that limits opportunity. We hope to change that.</p>
+
+        <p>If you are a student looking for a first research experience, or a mathematician who wants to mentor, start with the form in <a href="#get-involved">Get involved</a>.</p>
+      </div>
+      <div class="aside">
+        <figure class="fig">
+          <svg viewBox="0 0 300 300" role="img" aria-label="Four tangles of scribbled line arranged in a circle, each connected to the next by an arrow, so the process loops forever."><circle cx="150.0" cy="50.0" r="40" fill="#DFCA74" fill-opacity=".6"/><circle cx="250.0" cy="150.0" r="40" fill="#DFCA74" fill-opacity=".6"/><circle cx="150.0" cy="250.0" r="40" fill="#DFCA74" fill-opacity=".6"/><circle cx="50.0" cy="150.0" r="40" fill="#DFCA74" fill-opacity=".6"/><g fill="none" stroke="#0D0E4A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M163.4,54.9 Q146.2,53.6 165.1,50.8 Q183.9,47.9 167.3,51.6 Q150.6,55.2 137.7,53.0 Q124.8,50.7 142.6,59.1 Q160.4,67.6 139.0,52.9 Q117.5,38.2 141.5,30.4 Q165.5,22.5 163.9,39.7 Q162.3,56.9 157.3,40.3 Q152.3,23.6 138.7,29.0 Q125.2,34.5 118.8,41.2 Q112.4,47.8 128.8,59.2 Q145.2,70.5 148.4,64.5 Q151.5,58.4 150.8,59.1 Q150.0,59.7 148.3,48.2 Q146.6,36.7 161.9,49.6 Q177.2,62.5 156.2,48.1 Q135.2,33.8 134.2,29.0 Q133.1,24.2 152.2,34.1 Q171.3,44.0 174.5,43.6 Q177.7,43.2 180.3,45.7 Q182.8,48.2 185.6,46.0 Q188.4,43.8 152.1,50.8 Q115.8,57.8 144.1,47.0 Q172.3,36.2 144.6,38.1 Q117.0,40.0 118.2,37.4 Q119.4,34.8 146.6,32.7 Q173.8,30.7 164.3,38.8 Q154.7,46.8 140.0,55.4 Q125.3,63.9 122.9,61.3 Q120.5,58.6 119.9,51.9 Q119.3,45.2 123.2,40.7 Q127.0,36.2 130.7,54.6 Q134.3,73.1 130.6,58.4 Q126.9,43.7 152.6,51.1 Q178.4,58.5 152.7,47.0 Q127.1,35.5 149.4,37.6 Q171.8,39.7 152.8,32.1 Q133.7,24.4 125.5,39.7 Q117.2,55.0 123.3,55.5 Q129.4,56.1 134.6,51.6 Q139.7,47.2 163.2,48.1 Q186.7,49.0 171.3,60.5 Q156.0,72.0 140.3,50.6 Q124.6,29.2 127.3,30.3 Q130.0,31.4 155.3,43.8 Q180.6,56.2 163.4,54.9"/><path d="M257.0,151.7 Q248.0,160.1 255.6,143.6 Q263.3,127.1 247.6,148.5 Q231.9,169.9 248.6,163.2 Q265.2,156.5 260.0,158.4 Q254.7,160.3 238.1,153.2 Q221.6,146.2 218.8,154.1 Q216.0,162.0 226.5,152.9 Q237.0,143.9 243.8,133.9 Q250.7,123.8 234.9,134.5 Q219.0,145.1 219.9,141.5 Q220.8,138.0 240.3,133.2 Q259.7,128.5 262.7,124.9 Q265.7,121.3 244.7,145.7 Q223.7,170.2 232.9,157.5 Q242.0,144.8 249.9,146.7 Q257.7,148.5 249.2,134.2 Q240.8,120.0 239.6,130.6 Q238.5,141.2 251.9,151.2 Q265.2,161.1 242.2,147.1 Q219.1,133.0 229.1,141.9 Q239.1,150.7 256.9,150.4 Q274.8,150.0 259.6,150.6 Q244.4,151.2 236.1,148.3 Q227.8,145.3 234.4,156.4 Q241.1,167.4 229.6,160.3 Q218.2,153.2 221.2,157.9 Q224.2,162.5 230.9,160.7 Q237.5,158.8 225.8,153.1 Q214.2,147.4 220.4,141.7 Q226.7,136.0 237.4,157.7 Q248.1,179.4 248.3,179.3 Q248.5,179.2 243.8,154.6 Q239.1,130.1 254.5,153.2 Q269.9,176.4 270.8,158.1 Q271.7,139.9 242.4,148.7 Q213.2,157.6 231.7,138.6 Q250.3,119.5 243.0,144.0 Q235.8,168.4 256.2,163.7 Q276.6,158.9 252.5,155.3 Q228.4,151.7 238.3,154.9 Q248.2,158.1 240.7,166.0 Q233.3,173.9 232.8,176.1 Q232.3,178.4 241.7,170.5 Q251.2,162.5 258.8,147.1 Q266.4,131.7 249.6,133.0 Q232.8,134.3 248.7,148.4 Q264.7,162.4 254.1,147.9 Q243.6,133.4 244.2,157.1 Q244.8,180.7 249.8,169.3 Q254.8,158.0 262.8,151.4 Q270.8,144.7 264.0,160.2 Q257.1,175.7 265.1,165.4 Q273.1,155.1 255.5,148.4 Q237.8,141.6 253.3,147.8 Q268.9,154.1 260.8,161.3 Q252.8,168.5 246.6,146.4 Q240.4,124.3 239.3,131.1 Q238.3,138.0 261.5,150.0 Q284.7,162.1 269.0,160.0 Q253.3,157.8 236.7,155.0 Q220.0,152.2 243.0,147.7 Q266.0,143.2 257.0,151.7"/><path d="M149.0,268.8 Q129.8,262.6 147.6,268.2 Q165.5,273.8 144.5,252.7 Q123.6,231.7 122.0,231.5 Q120.4,231.3 145.0,228.1 Q169.7,224.9 161.1,227.7 Q152.6,230.5 142.7,237.9 Q132.8,245.3 155.6,251.4 Q178.4,257.4 177.2,264.1 Q176.0,270.8 176.7,268.7 Q177.4,266.6 153.5,270.2 Q129.6,273.8 139.2,270.6 Q148.9,267.3 152.1,256.3 Q155.4,245.2 147.0,245.2 Q138.6,245.2 136.5,234.6 Q134.4,224.0 155.6,247.1 Q176.9,270.3 165.7,268.6 Q154.6,266.9 136.9,264.5 Q119.3,262.0 132.3,245.0 Q145.2,228.0 135.1,239.8 Q125.0,251.5 127.1,249.4 Q129.3,247.2 144.1,245.1 Q158.9,242.9 138.9,246.1 Q119.0,249.4 123.4,240.7 Q127.8,232.0 126.1,236.5 Q124.3,240.9 119.2,250.6 Q114.2,260.3 151.1,251.4 Q188.1,242.5 178.2,261.0 Q168.4,279.4 172.0,276.2 Q175.7,273.0 168.7,249.9 Q161.7,226.9 152.2,251.0 Q142.7,275.0 162.6,272.8 Q182.4,270.6 153.7,272.3 Q125.1,274.0 132.3,269.4 Q139.5,264.7 149.1,264.9 Q158.7,265.1 142.2,261.6 Q125.8,258.0 141.3,257.1 Q156.8,256.2 147.5,260.8 Q138.2,265.5 137.4,250.8 Q136.7,236.1 129.2,249.3 Q121.8,262.5 119.6,246.9 Q117.4,231.3 115.6,245.5 Q113.8,259.8 134.3,256.4 Q154.7,252.9 133.0,249.4 Q111.3,245.9 124.0,234.1 Q136.8,222.3 127.5,229.4 Q118.2,236.5 124.4,246.6 Q130.6,256.6 122.5,252.3 Q114.5,248.0 126.7,260.3 Q138.8,272.7 144.3,277.3 Q149.7,281.9 150.6,265.1 Q151.4,248.2 157.8,242.2 Q164.2,236.2 137.5,243.1 Q110.7,250.1 147.6,258.2 Q184.5,266.2 157.1,264.4 Q129.7,262.5 154.5,248.0 Q179.3,233.6 168.4,236.9 Q157.4,240.2 143.0,237.9 Q128.5,235.5 126.8,237.7 Q125.1,239.9 118.2,241.4 Q111.2,243.0 113.2,255.3 Q115.3,267.6 144.1,248.3 Q173.0,228.9 160.7,241.3 Q148.4,253.7 142.2,244.7 Q136.0,235.7 140.2,230.5 Q144.5,225.3 160.9,228.1 Q177.2,230.8 155.3,236.6 Q133.5,242.4 135.9,244.2 Q138.3,246.0 125.0,249.2 Q111.7,252.4 115.3,261.5 Q118.9,270.6 127.0,273.7 Q135.1,276.7 144.5,250.6 Q153.8,224.5 151.0,232.9 Q148.2,241.3 142.6,255.9 Q137.0,270.5 131.5,267.7 Q126.0,264.8 145.0,272.2 Q164.0,279.6 157.8,279.1 Q151.7,278.6 148.3,266.8 Q145.0,255.0 152.6,264.0 Q160.1,273.1 139.8,262.7 Q119.5,252.3 147.9,252.3 Q176.2,252.3 154.6,237.1 Q133.0,221.9 151.0,222.6 Q169.1,223.3 168.6,249.1 Q168.2,274.9 149.0,268.8"/><path d="M29.5,164.6 Q18.5,162.2 40.4,169.3 Q62.2,176.4 46.9,155.9 Q31.7,135.3 50.2,147.4 Q68.7,159.5 51.5,160.3 Q34.2,161.1 38.0,163.9 Q41.7,166.7 30.6,150.0 Q19.5,133.4 50.8,137.4 Q82.1,141.5 56.5,154.9 Q30.8,168.3 45.7,148.6 Q60.5,129.0 57.3,144.4 Q54.1,159.8 38.7,159.5 Q23.2,159.1 21.5,149.7 Q19.8,140.2 54.0,142.2 Q88.2,144.2 88.7,145.3 Q89.2,146.3 73.9,159.3 Q58.6,172.4 61.8,149.5 Q65.0,126.7 61.0,142.4 Q57.1,158.0 68.6,154.4 Q80.0,150.8 52.7,149.0 Q25.5,147.2 26.5,157.5 Q27.5,167.9 38.7,147.0 Q50.0,126.1 59.6,126.5 Q69.2,126.8 60.6,126.2 Q52.1,125.6 50.2,143.4 Q48.4,161.1 50.6,154.2 Q52.8,147.3 50.8,146.8 Q48.8,146.2 53.2,136.0 Q57.6,125.7 52.8,129.9 Q48.0,134.2 57.1,144.2 Q66.3,154.3 75.9,149.8 Q85.5,145.4 61.7,149.8 Q37.8,154.2 61.5,145.0 Q85.1,135.8 59.7,133.6 Q34.2,131.3 47.2,139.7 Q60.3,148.2 45.4,145.7 Q30.5,143.3 59.6,149.2 Q88.6,155.2 60.6,165.7 Q32.6,176.2 35.6,155.6 Q38.7,135.1 32.3,134.4 Q25.9,133.8 52.9,134.8 Q79.8,135.9 54.9,146.1 Q29.9,156.2 56.6,146.9 Q83.4,137.5 77.1,139.8 Q70.9,142.1 62.9,148.9 Q54.9,155.8 52.8,163.1 Q50.7,170.5 45.0,156.8 Q39.3,143.0 63.1,147.9 Q86.8,152.8 79.3,145.8 Q71.9,138.9 77.5,147.8 Q83.2,156.8 65.4,148.6 Q47.5,140.4 39.3,133.3 Q31.0,126.2 28.5,143.9 Q26.1,161.5 23.7,148.5 Q21.3,135.5 33.5,144.1 Q45.8,152.7 43.1,159.9 Q40.4,167.1 29.5,164.6"/><path d="M205.9,67.1 A100,100 0 0 1 232.9,94.1" stroke="#837825" stroke-width="1.9" marker-end="url(#ahm)"/><path d="M232.9,205.9 A100,100 0 0 1 205.9,232.9" stroke="#837825" stroke-width="1.9" marker-end="url(#ahm)"/><path d="M94.1,232.9 A100,100 0 0 1 67.1,205.9" stroke="#837825" stroke-width="1.9" marker-end="url(#ahm)"/><path d="M67.1,94.1 A100,100 0 0 1 94.1,67.1" stroke="#837825" stroke-width="1.9" marker-end="url(#ahm)"/></g></svg>
+          <figcaption><b>Figure 5.</b> The research process </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="row" id="get-involved" aria-labelledby="involved-h">
+      <h2 id="involved-h">Get involved</h2>
+      <div class="main">
+        <p>If you want to join, mentor, be mentored, help run a workshop, or just be part of our group, start with this form.</p>
+        <!-- Replace the address below with your Google Form link. -->
+        <p><a class="btn" href="https://forms.gle/zskG3BBkZ6Y7rA6o9">Interest form</a></p>
+        <!-- Replace this address once your email is set up. -->
+        <p>Prefer email? <a href="mailto:hello@wlog-collective.org">hello@wlog-collective.org</a></p>
+      </div>
+      <div class="aside">
+        <p><b>Exercise 1.</b> Fill out the interest form.</p>
+        <figure class="fig">
+          <svg viewBox="0 0 240 170" role="img" aria-label="A disk with a dashed boundary, containing two points, each surrounded by a small disk that stays inside."><circle class="wb" cx="120" cy="85" r="64"/><circle class="fh" cx="120" cy="85" r="64"/><circle class="ln" cx="120" cy="85" r="64" stroke-dasharray="6 5" stroke-width="2"/><circle class="pf" cx="104" cy="74" r="25" stroke-width="1.2"/><circle cx="104" cy="74" r="3.2" fill="#0D0E4A"/><path class="ln" d="M104 74H129" stroke-width="1.1"/><text class="lbl sm" x="116" y="68" text-anchor="middle">ε</text><text class="lbl" x="92" y="70" text-anchor="middle">x</text><circle class="pf" cx="150" cy="118" r="15" stroke-width="1.2"/><circle cx="150" cy="118" r="3.2" fill="#0D0E4A"/></svg>
+          <figcaption><b>Figure 6.</b> An open set.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+  <footer class="foot-wrap">
+    <div class="foot">
+      <p>&copy; 2026 WLOG Collective</p>
+      <p class="qed-line"><span role="img" aria-label="end of proof"> &#8718;</span></p>
+      <p>Content licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+    </div>
+  </footer>
+</div>
+/* AHHH why tf isn't this working!! come back later */
+<script>
+/* Figure 1: oscilloscope art!
+   The button retunes the ribbon Lissajous curves and re-draws the three maps with new parameters. */
+(function () {
+  var cv = document.getElementById('scope');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
+  var btn = document.getElementById('retune');
+  var status = document.getElementById('scope-status');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var INK = '#0D0E4A', PARCH = '#F0E3C5';
+  var STOPS = ['#20486B', '#6699CC', '#C2938D', '#AF3F3B', '#837825'].map(function (h) {
+    return [parseInt(h.substr(1, 2), 16), parseInt(h.substr(3, 2), 16), parseInt(h.substr(5, 2), 16)];
+  });
+  function grad(u) {
+    u = Math.min(1, Math.max(0, u)) * (STOPS.length - 1);
+    var i = Math.min(STOPS.length - 2, Math.floor(u)), f = u - i, a = STOPS[i], b = STOPS[i + 1];
+    return [Math.round(a[0] + (b[0] - a[0]) * f), Math.round(a[1] + (b[1] - a[1]) * f), Math.round(a[2] + (b[2] - a[2]) * f)];
+  }
+  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+
+  var PRESETS = [
+    { a: 3, b: 2, c: 5, rho: 28,  hb: 0.3,  K: 0.97 },
+    { a: 5, b: 4, c: 3, rho: 14,  hb: 0.25, K: 0.35 },
+    { a: 3, b: 2, c: 7, rho: 99.96, hb: 0.15, K: 1.6 },
+    { a: 3, b: 4, c: 5, rho: 60,  hb: 0.2,  K: 3.2 }
+  ];
+  var idx = 0, cur = { a: 3, b: 2, c: 5 }, L, s, base, panels, anim = 0;
+
+  function layout() {
+    var narrow = cv.parentNode.clientWidth < 640;
+    if (!narrow) {
+      return { narrow: false, W: 1000, H: 500,
+        ribbon: { cx: 300, cy: 246, R: 215 },
+        lor: { x: 590, y: 22, w: 380, h: 170 },
+        std: { x: 590, y: 232, w: 180, h: 180 },
+        hen: { x: 790, y: 232, w: 180, h: 180 } };
+    }
+    return { narrow: true, W: 500, H: 540,
+      ribbon: { cx: 250, cy: 190, R: 175 },
+      lor: { x: 20, y: 385, w: 310, h: 135 },
+      std: { x: 350, y: 385, w: 130, h: 135 },
+      hen: null };
+  }
+
+  function setup() {
+    L = layout();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var cssW = cv.parentNode.clientWidth || 1000;
+    cv.width = Math.round(cssW * dpr);
+    cv.height = Math.round(cssW * dpr * L.H / L.W);
+    s = cv.width / L.W;
+    buildBase();
+    buildPanels(PRESETS[idx]);
+    frame();
+  }
+
+  function offscreen() {
+    var c = document.createElement('canvas');
+    c.width = cv.width; c.height = cv.height;
+    return c;
+  }
+
+  function buildBase() {
+    base = offscreen();
+    var g = base.getContext('2d');
+    g.fillStyle = PARCH; g.fillRect(0, 0, base.width, base.height);
+    g.lineWidth = 1;
+    for (var x = 0; x <= L.W; x += 50) {
+      g.strokeStyle = (x === L.W / 2) ? 'rgba(32,72,107,0.26)' : 'rgba(32,72,107,0.11)';
+      g.beginPath(); g.moveTo(x * s, 0); g.lineTo(x * s, L.H * s); g.stroke();
+    }
+    for (var y = 0; y <= L.H; y += 50) {
+      g.strokeStyle = (y === L.H / 2) ? 'rgba(32,72,107,0.26)' : 'rgba(32,72,107,0.11)';
+      g.beginPath(); g.moveTo(0, y * s); g.lineTo(L.W * s, y * s); g.stroke();
+    }
+  }
+
+  function fit(pts, box, uniform, xstretch) {
+    var minx = 1e9, maxx = -1e9, miny = 1e9, maxy = -1e9, i;
+    for (i = 0; i < pts.length; i++) {
+      if (pts[i][0] < minx) minx = pts[i][0]; if (pts[i][0] > maxx) maxx = pts[i][0];
+      if (pts[i][1] < miny) miny = pts[i][1]; if (pts[i][1] > maxy) maxy = pts[i][1];
+    }
+    var pad = 10, sx = (box.w - 2 * pad) / (maxx - minx || 1), sy = (box.h - 2 * pad) / (maxy - miny || 1);
+    if (uniform) { sx = sy = Math.min(sx, sy); if (xstretch) { sx = Math.min(sx * xstretch, (box.w - 2 * pad) / (maxx - minx || 1)); } }
+    var ox = box.x + box.w / 2 - sx * (minx + maxx) / 2, oy = box.y + box.h / 2 + sy * (miny + maxy) / 2;
+    return function (p) { return [(ox + sx * p[0]) * s, (oy - sy * p[1]) * s]; };
+  }
+
+  function lorenz(rho) {
+    var x = 1, y = 1, z = 1, dt = 0.006, sg = 10, be = 8 / 3, pts = [], i;
+    function f(x, y, z) { return [sg * (y - x), x * (rho - z) - y, x * y - be * z]; }
+    for (i = 0; i < 17000; i++) {
+      var k1 = f(x, y, z), k2 = f(x + dt / 2 * k1[0], y + dt / 2 * k1[1], z + dt / 2 * k1[2]);
+      x += dt * k2[0]; y += dt * k2[1]; z += dt * k2[2];
+      if (i > 600) pts.push([x, z]);
+    }
+    return pts;
+  }
+
+  function henon(a, b) {
+    var x = 0.1, y = 0.1, pts = [], i, nx;
+    for (i = 0; i < 24000; i++) {
+      nx = 1 - a * x * x + y; y = b * x; x = nx;
+      if (i > 100) pts.push([x, y]);
+    }
+    return pts;
+  }
+
+  function standard(K) {
+    var pts = [], TW = 2 * Math.PI, j, i, th, p, np;
+    for (j = 0; j < 40; j++) {
+      th = ((j * 0.6180339887) % 1) * TW; p = ((j * 0.7548776662) % 1) * TW;
+      var orbit = [];
+      for (i = 0; i < 420; i++) {
+        p = p + K * Math.sin(th); th = th + p;
+        th = ((th % TW) + TW) % TW; p = ((p % TW) + TW) % TW;
+        orbit.push([th, p]);
+      }
+      pts.push(orbit);
+    }
+    return pts;
+  }
+
+  function label(g, text, x, y) {
+    if (L.narrow) return;
+    g.fillStyle = INK;
+    g.font = 'italic ' + (15 * s) + 'px "EB Garamond", Georgia, serif';
+    g.textAlign = 'left';
+    g.fillText(text, x * s, y * s);
+  }
+
+  function frameBox(g, b) {
+    g.strokeStyle = 'rgba(13,14,74,0.6)'; g.lineWidth = Math.max(1, s);
+    g.strokeRect(b.x * s, b.y * s, b.w * s, b.h * s);
+  }
+
+  function buildPanels(p) {
+    panels = offscreen();
+    var g = panels.getContext('2d'), i, k, pts, tr, c;
+    g.drawImage(base, 0, 0);
+    // a faint gold wash behind each small panel, like the tinted plates
+    g.fillStyle = 'rgba(223,202,116,0.30)';
+    [L.lor, L.std, L.hen].forEach(function (b) { if (b) g.fillRect(b.x * s, b.y * s, b.w * s, b.h * s); });
+    g.globalCompositeOperation = 'multiply';
+
+    // Lorenz
+    pts = lorenz(p.rho); tr = fit(pts, L.lor, true, 1.9);
+    g.lineWidth = 1.05 * s; g.lineJoin = 'round';
+    for (i = 0; i < pts.length - 1; i += 220) {
+      c = grad(i / pts.length);
+      g.strokeStyle = rgba(c, 0.62); g.beginPath();
+      var q = tr(pts[i]); g.moveTo(q[0], q[1]);
+      for (k = i + 1; k <= Math.min(i + 221, pts.length - 1); k++) { q = tr(pts[k]); g.lineTo(q[0], q[1]); }
+      g.stroke();
+    }
+
+    // Chirikov standard map
+    var orb = standard(p.K), sb = L.std;
+    g.globalCompositeOperation = 'source-over';
+    for (i = 0; i < orb.length; i++) {
+      g.fillStyle = rgba(grad(i / (orb.length - 1)), 0.9);
+      for (k = 0; k < orb[i].length; k++) {
+        g.fillRect((sb.x + 8 + (sb.w - 16) * orb[i][k][0] / (2 * Math.PI)) * s,
+                   (sb.y + 8 + (sb.h - 16) * (1 - orb[i][k][1] / (2 * Math.PI))) * s, 1.1 * s, 1.1 * s);
+      }
+    }
+
+    // Henon map
+    if (L.hen) {
+      pts = henon(1.4, p.hb); tr = fit(pts, L.hen, false);
+      g.globalCompositeOperation = 'source-over';
+      g.fillStyle = 'rgba(131,120,37,0.75)';
+      for (i = 0; i < pts.length; i++) { q = tr(pts[i]); g.fillRect(q[0], q[1], 1.2 * s, 1.2 * s); }
+    }
+
+    frameBox(g, L.lor); frameBox(g, L.std); if (L.hen) frameBox(g, L.hen);
+    label(g, 'Lorenz attractor, \u03c1 = ' + p.rho, L.lor.x, L.lor.y + L.lor.h + 17);
+    label(g, 'Standard map, K = ' + p.K, L.std.x, L.std.y + L.std.h + 17);
+    if (L.hen) label(g, 'H\u00e9non map, b = ' + p.hb, L.hen.x, L.hen.y + L.hen.h + 17);
+  }
+
+  function ribbon(a, b, c) {
+    var K = 60, N = 420, R = L.ribbon.R * s / 1.45, cx = L.ribbon.cx * s, cy = L.ribbon.cy * s, k, i;
+    var ca = Math.cos(0.65), sa = Math.sin(0.65), cb = Math.cos(0.38), sb = Math.sin(0.38);
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.lineWidth = 1.1 * s; ctx.lineJoin = 'round';
+    for (k = 0; k < K; k++) {
+      var u = k / (K - 1), phi = u * Math.PI;
+      ctx.strokeStyle = rgba(grad(u), 0.42);
+      ctx.beginPath();
+      for (i = 0; i <= N; i++) {
+        var t = i / N * 2 * Math.PI;
+        var x = Math.sin(a * t + phi), y = Math.sin(b * t), z = Math.sin(c * t + 2 * phi);
+        var X = x * ca + z * sa, Z = -x * sa + z * ca, Y = y * cb - Z * sb;
+        if (i === 0) ctx.moveTo(cx + R * X, cy + R * Y); else ctx.lineTo(cx + R * X, cy + R * Y);
+      }
+      ctx.stroke();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    if (!L.narrow) {
+      ctx.fillStyle = INK;
+      ctx.font = 'italic ' + (15 * s) + 'px "EB Garamond", Georgia, serif';
+      ctx.textAlign = 'center';
+      var fmt = function (v) { return (Math.round(v * 10) / 10).toString(); };
+      ctx.fillText('Lissajous ribbon, ' + fmt(a) + ' : ' + fmt(b) + ' : ' + fmt(c), L.ribbon.cx * s, (L.H - 14) * s);
+    }
+  }
+
+  function frame() {
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(panels, 0, 0);
+    ribbon(cur.a, cur.b, cur.c);
+  }
+
+  function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+  function retune() {
+    idx = (idx + 1) % PRESETS.length;
+    var p = PRESETS[idx], from = { a: cur.a, b: cur.b, c: cur.c };
+    buildPanels(p);
+    cancelAnimationFrame(anim);
+    status.textContent = 'Retuned. Lissajous ' + p.a + ' to ' + p.b + ' to ' + p.c + ', Lorenz rho ' + p.rho + ', standard map K ' + p.K + '.';
+    if (reduce) { cur = { a: p.a, b: p.b, c: p.c }; frame(); return; }
+    var t0 = performance.now(), dur = 1500;
+    (function step(now) {
+      var t = Math.min(1, (now - t0) / dur), e = ease(t);
+      cur = { a: from.a + (p.a - from.a) * e, b: from.b + (p.b - from.b) * e, c: from.c + (p.c - from.c) * e };
+      frame();
+      if (t < 1) anim = requestAnimationFrame(step);
+    })(t0);
+  }
+
+  btn.addEventListener('click', retune);
+  var rt;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () { var w = cv.parentNode.clientWidth; if (w !== setup.w) { setup.w = w; setup(); } }, 120);
+  });
+  setup.w = cv.parentNode.clientWidth;
+  setup();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { buildPanels(PRESETS[idx]); frame(); });
+})();
+</script>
+</body>
+</html>
